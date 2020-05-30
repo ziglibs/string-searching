@@ -1,6 +1,10 @@
-# zig-boyer-moore
+# zig-string-searching
 
-Implementation of the Boyer-Moore string-search algorithm in
-[zig](https://ziglang.org). Ported from the implementation in the Go
+Implementation of some string-search algorithms in
+[zig](https://ziglang.org). 
+
+### Boyer-Moore string searching
+
+Ported from the implementation in the Go
 standard library:
 [strings/search.go](https://golang.org/src/strings/search.go).
