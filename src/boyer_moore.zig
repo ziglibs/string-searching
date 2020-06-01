@@ -3,6 +3,8 @@ const Allocator = std.mem.Allocator;
 const assert = std.debug.assert;
 const testing = std.testing;
 
+const test_suites = @import("test_cases.zig").test_suites;
+
 pub fn StringFinder(comptime T: type) type {
     assert(std.meta.trait.isIndexable(T));
     const ElemType = std.meta.Elem(T);
@@ -128,41 +130,15 @@ pub fn StringFinder(comptime T: type) type {
     };
 }
 
-test "empty pattern" {
+test "boyer moore" {
     const allocator = testing.allocator;
 
-    var sf = try StringFinder([]const u8).init(allocator, "");
-    defer sf.deinit();
+    for (test_suites) |suite| {
+        var sf = try StringFinder([]const u8).init(allocator, suite.pattern);
+        defer sf.deinit();
 
-    testing.expectEqual(@as(?usize, 0), sf.next("zig"));
-    testing.expectEqual(@as(?usize, 0), sf.next(""));
-    testing.expectEqual(@as(?usize, 0), sf.next("a"));
-    testing.expectEqual(@as(?usize, 0), sf.next("lang"));
-}
-
-test "pattern with length 1" {
-    const allocator = testing.allocator;
-
-    var sf = try StringFinder([]const u8).init(allocator, "a");
-    defer sf.deinit();
-
-    testing.expectEqual(@as(?usize, null), sf.next("zig"));
-    testing.expectEqual(@as(?usize, null), sf.next(""));
-    testing.expectEqual(@as(?usize, 0), sf.next("a"));
-    testing.expectEqual(@as(?usize, 1), sf.next("lang"));
-}
-
-test "test matching" {
-    const allocator = testing.allocator;
-
-    var sf = try StringFinder([]const u8).init(allocator, "zig");
-    defer sf.deinit();
-
-    testing.expectEqual(@as(?usize, 0), sf.next("zig"));
-    testing.expectEqual(@as(?usize, 0), sf.next("ziglang"));
-    testing.expectEqual(@as(?usize, 4), sf.next("langzig"));
-    testing.expectEqual(@as(?usize, 4), sf.next("langziglang"));
-    testing.expectEqual(@as(?usize, null), sf.next(""));
-    testing.expectEqual(@as(?usize, null), sf.next("firefox"));
-    testing.expectEqual(@as(?usize, 8), sf.next("abc abc ziglang"));
+        for (suite.cases) |case| {
+            testing.expectEqual(case.expected, sf.next(case.text));
+        }
+    }
 }
