@@ -4,6 +4,7 @@ const assert = std.debug.assert;
 const testing = std.testing;
 
 const test_suites = @import("test_cases.zig").test_suites;
+const possibleValues = @import("common.zig").possibleValues;
 
 pub fn StringFinder(comptime T: type) type {
     assert(std.meta.trait.isIndexable(T));
@@ -26,11 +27,6 @@ pub fn StringFinder(comptime T: type) type {
             .bad_char = [_]usize{0} ** possible_values,
             .good_suffix = &[_]usize{},
         };
-
-        /// Returns the number of possible values for an integer type
-        fn possibleValues(comptime Type: type) usize {
-            return std.math.maxInt(Type) - std.math.minInt(Type) + 1;
-        }
 
         /// Returns the maximum length of suffixes of both strings
         fn longestCommonSuffix(a: T, b: T) usize {
