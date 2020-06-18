@@ -19,18 +19,8 @@ pub fn bitap(
     assert(@typeInfo(ElemType) == .Int);
     assert(pattern.len <= max_pattern_length);
 
-    const Int = @Type(std.builtin.TypeInfo{
-        .Int = .{
-            .is_signed = false,
-            .bits = max_pattern_length + 1,
-        },
-    });
-    const Log2Int = @Type(std.builtin.TypeInfo{
-        .Int = .{
-            .is_signed = false,
-            .bits = std.math.log2(max_pattern_length + 1),
-        },
-    });
+    const Int = std.meta.Int(false, max_pattern_length + 1);
+    const Log2Int = std.meta.Int(false, std.math.log2(max_pattern_length + 1));
     const possible_values = possibleValues(ElemType);
 
     if (pattern.len == 0) return 0;
