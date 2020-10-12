@@ -1,4 +1,4 @@
-# zig-string-searching
+# string-searching
 
 ![CI](https://github.com/ziglibs/zig-string-searching/workflows/CI/badge.svg)
 
