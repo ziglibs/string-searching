@@ -134,7 +134,7 @@ test "boyer moore" {
         defer sf.deinit();
 
         for (suite.cases) |case| {
-            testing.expectEqual(case.expected, sf.next(case.text));
+            try testing.expectEqual(case.expected, sf.next(case.text));
         }
     }
 }

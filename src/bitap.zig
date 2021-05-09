@@ -51,7 +51,7 @@ test "bitap" {
     inline for (&[_]comptime_int{ 31, 63, 127, 59, 67 }) |max_pattern_length| {
         for (test_suites) |suite| {
             for (suite.cases) |case| {
-                testing.expectEqual(case.expected, bitap(
+                try testing.expectEqual(case.expected, bitap(
                     []const u8,
                     max_pattern_length,
                     case.text,
