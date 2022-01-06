@@ -12,7 +12,7 @@ pub fn StringFinder(comptime T: type) type {
     assert(@typeInfo(ElemType) == .Int);
 
     return struct {
-        allocator: ?*Allocator,
+        allocator: ?Allocator,
         pattern: T,
         bad_char: [possible_values]usize,
         good_suffix: []usize,
@@ -40,7 +40,7 @@ pub fn StringFinder(comptime T: type) type {
         }
 
         /// Initializes a StringFinder with a pattern
-        pub fn init(allocator: *Allocator, pattern: T) !Self {
+        pub fn init(allocator: Allocator, pattern: T) !Self {
             if (pattern.len == 0) return Self.empty;
 
             var self = Self{
