@@ -53,9 +53,9 @@ pub fn StringFinder(comptime T: type) type {
             const last = pattern.len - 1;
 
             // Initialize bad character rule table
-            for (self.bad_char) |*x| x.* = pattern.len;
+            for (&self.bad_char) |*x| x.* = pattern.len;
 
-            for (pattern) |x, i| {
+            for (pattern, 0..) |x, i| {
                 if (i == last) break;
                 self.bad_char[x] = last - i;
             }

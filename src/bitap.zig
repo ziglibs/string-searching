@@ -31,11 +31,11 @@ pub fn bitap(
     var R: Int = ~one;
     var pattern_mask = [_]Int{std.math.maxInt(Int)} ** possible_values;
 
-    for (pattern) |x, i| {
+    for (pattern, 0..) |x, i| {
         pattern_mask[x] &= ~(one << @intCast(Log2Int, i));
     }
 
-    for (text) |x, i| {
+    for (text, 0..) |x, i| {
         R |= pattern_mask[x];
         R <<= 1;
 
