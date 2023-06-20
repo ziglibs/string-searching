@@ -115,7 +115,7 @@ pub fn StringFinder(comptime T: type) type {
 
                 // Use the bad character table and the good suffix table
                 // to advance our position
-                i += std.math.max(
+                i += @max(
                     self.bad_char[text[i - 1]],
                     self.good_suffix[j - 1],
                 );
