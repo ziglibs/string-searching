@@ -24,7 +24,7 @@ pub fn bitap(
     const possible_values = possibleValues(ElemType);
 
     if (pattern.len == 0) return 0;
-    const len = @intCast(Log2Int, pattern.len);
+    const len = @as(Log2Int, @intCast(pattern.len));
 
     const one: Int = 1;
 
@@ -32,7 +32,7 @@ pub fn bitap(
     var pattern_mask = [_]Int{std.math.maxInt(Int)} ** possible_values;
 
     for (pattern, 0..) |x, i| {
-        pattern_mask[x] &= ~(one << @intCast(Log2Int, i));
+        pattern_mask[x] &= ~(one << @as(Log2Int, @intCast(i)));
     }
 
     for (text, 0..) |x, i| {
