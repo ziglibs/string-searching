@@ -3,7 +3,7 @@
 ![CI](https://github.com/ziglibs/zig-string-searching/workflows/CI/badge.svg)
 
 Implementation of some string-search algorithms in
-[zig](https://ziglang.org).
+[zig](https://ziglang.org). Compatible with zig v0.11.0.
 
 ### Boyer-Moore string searching
 
