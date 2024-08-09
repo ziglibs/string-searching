@@ -7,7 +7,6 @@ const test_suites = @import("test_cases.zig").test_suites;
 const possibleValues = @import("common.zig").possibleValues;
 
 pub fn StringFinder(comptime T: type) type {
-    assert(std.meta.trait.isIndexable(T));
     const ElemType = std.meta.Elem(T);
     assert(@typeInfo(ElemType) == .Int);
 

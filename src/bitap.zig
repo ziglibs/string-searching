@@ -14,7 +14,6 @@ pub fn bitap(
     text: T,
     pattern: T,
 ) ?usize {
-    assert(std.meta.trait.isIndexable(T));
     const ElemType = std.meta.Elem(T);
     assert(@typeInfo(ElemType) == .Int);
     assert(pattern.len <= max_pattern_length);

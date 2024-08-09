@@ -7,12 +7,14 @@ const test_suites = @import("test_cases.zig").test_suites;
 pub fn byteRabinKarp(text: []const u8, pattern: []const u8) ?usize {
     const hashFn = struct {
         pub fn f(str: []const u8) usize {
+            // TODO
             return 0;
         }
     }.f;
 
     const continueHashFn = struct {
         pub fn f(h: usize, x: u8) usize {
+            // TODO
             return 0;
         }
     }.f;
